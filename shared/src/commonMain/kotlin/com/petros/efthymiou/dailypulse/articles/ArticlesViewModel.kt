@@ -20,13 +20,15 @@ class ArticlesViewModel : BaseViewModel() {
 
     private fun getArticles() {
         scope.launch {
+            delay(2000)
+            _articlesState.emit(ArticleState(error = "Something went wrong!"))
+            delay(2000)
             val fetchedArticles = fetchArticles()
-            delay(500)
             _articlesState.emit(ArticleState(articles = fetchedArticles))
         }
     }
 
-    suspend fun fetchArticles(): List<Article> = mockArticles
+    private suspend fun fetchArticles(): List<Article> = mockArticles
 
     private val mockArticles = listOf(
         Article(
