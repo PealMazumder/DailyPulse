@@ -1,4 +1,4 @@
-package com.petros.efthymiou.dailypulse.articles
+package com.petros.efthymiou.dailypulse.articles.data
 
 import petros.efthymiou.dailypulse.db.DailyPulseDatabase
 
@@ -28,7 +28,6 @@ class ArticlesDatasource(private val database: DailyPulseDatabase) {
 
     fun clearArticles() =
         database.dialyPulseDatabaseQueries.removeAllArticles()
-}
     private fun mapToArticleRaw(
         title: String,
         desc: String?,
@@ -41,3 +40,4 @@ class ArticlesDatasource(private val database: DailyPulseDatabase) {
             date,
             url
         )
+}

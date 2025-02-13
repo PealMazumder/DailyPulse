@@ -1,6 +1,8 @@
 package com.petros.efthymiou.dailypulse.articles
 
-import com.petros.efthymiou.dailypulse.network.ArticlesService
+import com.petros.efthymiou.dailypulse.articles.data.ArticleRaw
+import com.petros.efthymiou.dailypulse.articles.data.ArticlesDatasource
+import com.petros.efthymiou.dailypulse.articles.data.network.ArticlesService
 
 
 /**

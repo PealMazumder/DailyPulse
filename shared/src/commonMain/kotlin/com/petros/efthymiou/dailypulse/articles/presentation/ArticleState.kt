@@ -1,4 +1,6 @@
-package com.petros.efthymiou.dailypulse.articles
+package com.petros.efthymiou.dailypulse.articles.presentation
+
+import com.petros.efthymiou.dailypulse.articles.domain.Article
 
 
 /**
