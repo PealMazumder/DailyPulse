@@ -14,10 +14,10 @@ import kotlin.math.abs
  * Created by Peal Mazumder on 12/2/25.
  */
 class ArticlesUseCase(
-    private val service: ArticlesService
+    private val repository: ArticlesRepository,
 ) {
     suspend fun getArticles(): List<Article> {
-        val articlesRaw = service.fetchArticles()
+        val articlesRaw = repository.getArticles()
         return mapArticles(articlesRaw)
     }
 
