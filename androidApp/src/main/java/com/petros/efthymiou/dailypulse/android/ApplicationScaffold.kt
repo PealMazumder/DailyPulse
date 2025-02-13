@@ -20,7 +20,7 @@ import com.petros.efthymiou.dailypulse.articles.ArticlesViewModel
  */
 
 @Composable
-fun AppScaffold(articlesViewModel: ArticlesViewModel) {
+fun AppScaffold() {
     val navController = rememberNavController()
 
     Scaffold {
@@ -29,7 +29,6 @@ fun AppScaffold(articlesViewModel: ArticlesViewModel) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it),
-            articlesViewModel
         )
     }
 }
@@ -38,7 +37,6 @@ fun AppScaffold(articlesViewModel: ArticlesViewModel) {
 fun AppNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
-    articlesViewModel: ArticlesViewModel
 ) {
     NavHost(
         navController = navController,
@@ -48,7 +46,6 @@ fun AppNavHost(
         composable(Screens.ARTICLES.route) {
             ArticlesScreen(
                 onAboutButtonClick = { navController.navigate(Screens.ABOUT_DEVICE.route) },
-                articlesViewModel,
             )
         }
 

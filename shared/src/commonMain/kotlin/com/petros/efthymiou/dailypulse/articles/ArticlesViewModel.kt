@@ -14,32 +14,20 @@ import kotlinx.serialization.json.Json
 /**
  * Created by Peal Mazumder on 12/2/25.
  */
-class ArticlesViewModel : BaseViewModel() {
+class ArticlesViewModel(
+    private val articleUseCase: ArticlesUseCase
+) : BaseViewModel() {
     private val _articlesState: MutableStateFlow<ArticleState> = MutableStateFlow(ArticleState(loading = true))
     val articlesState: StateFlow<ArticleState> get() = _articlesState
 
-    private val useCase: ArticlesUseCase
-
     init {
-        val httpClient = HttpClient {
-            install(ContentNegotiation) {
-                json(Json {
-                    prettyPrint = true
-                    isLenient = true
-                    ignoreUnknownKeys = true
-                })
-            }
-        }
-        val service = ArticlesService(httpClient)
-
-        useCase = ArticlesUseCase(service)
         getArticles()
     }
 
     private fun getArticles() {
         scope.launch {
 
-            val fetchedArticles = useCase.getArticles()
+            val fetchedArticles = articleUseCase.getArticles()
 
             _articlesState.emit(ArticleState(articles = fetchedArticles))
         }

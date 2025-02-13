@@ -30,6 +30,7 @@ import coil.compose.AsyncImage
 import com.petros.efthymiou.dailypulse.android.screens.components.Loader
 import com.petros.efthymiou.dailypulse.articles.Article
 import com.petros.efthymiou.dailypulse.articles.ArticlesViewModel
+import org.koin.androidx.compose.getViewModel
 
 
 /**
@@ -39,7 +40,7 @@ import com.petros.efthymiou.dailypulse.articles.ArticlesViewModel
 @Composable
 fun ArticlesScreen(
     onAboutButtonClick: () -> Unit,
-    articlesViewModel: ArticlesViewModel,
+    articlesViewModel: ArticlesViewModel = getViewModel(),
 ) {
     val articlesState = articlesViewModel.articlesState.collectAsState()
 
