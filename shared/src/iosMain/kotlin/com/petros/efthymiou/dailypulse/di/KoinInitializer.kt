@@ -11,7 +11,7 @@ import org.koin.core.context.startKoin
  */
 
 fun initKoin() {
-    val modules = sharedKoinModule
+    val modules = sharedKoinModule + databaseModule
     startKoin {
         modules(modules)
     }
