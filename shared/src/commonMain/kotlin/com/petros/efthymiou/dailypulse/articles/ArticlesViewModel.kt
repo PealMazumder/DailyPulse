@@ -1,14 +1,9 @@
 package com.petros.efthymiou.dailypulse.articles
 
 import com.petros.efthymiou.dailypulse.BaseViewModel
-import com.petros.efthymiou.dailypulse.network.ArticlesService
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 
 
 /**
@@ -17,17 +12,23 @@ import kotlinx.serialization.json.Json
 class ArticlesViewModel(
     private val articleUseCase: ArticlesUseCase
 ) : BaseViewModel() {
-    private val _articlesState: MutableStateFlow<ArticleState> = MutableStateFlow(ArticleState(loading = true))
+    private val _articlesState: MutableStateFlow<ArticleState> =
+        MutableStateFlow(ArticleState(loading = true))
     val articlesState: StateFlow<ArticleState> get() = _articlesState
 
     init {
         getArticles()
     }
 
-    private fun getArticles() {
+    fun getArticles(forceFetch: Boolean = false) {
         scope.launch {
-
-            val fetchedArticles = articleUseCase.getArticles()
+            _articlesState.emit(
+                ArticleState(
+                    loading = true,
+                    articles = _articlesState.value.articles
+                )
+            )
+            val fetchedArticles = articleUseCase.getArticles(forceFetch)
 
             _articlesState.emit(ArticleState(articles = fetchedArticles))
         }
